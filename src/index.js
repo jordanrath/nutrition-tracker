@@ -7,12 +7,8 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
-// The Chart import syntax is different than you saw in the final project
-// We're using a newer version (3.5.x) and following the instructions for Webpack/Parcel
-// https://www.chartjs.org/docs/3.5.0/getting-started/integration.html#bundlers-webpack-rollup-etc
 import Chart from "chart.js/auto";
 
-// TODO: If you plan on hosting this, make sure to change the entire URL below to your own Firebase Firestore database
 const API = new FetchWrapper(
   "https://nutrition-logger-4a682-default-rtdb.firebaseio.com/"
 );
@@ -31,6 +27,8 @@ const firebaseConfig = {
 
 };
 
+
+// ************* Add route to username login and add username to display on main page ***********
 
 // Initialize Firebase
 
