@@ -14,20 +14,20 @@ import Chart from "chart.js/auto";
 
 // TODO: If you plan on hosting this, make sure to change the entire URL below to your own Firebase Firestore database
 const API = new FetchWrapper(
-  "https://nutrition-tracker-b1f22-default-rtdb.firebaseio.com"
+  "https://nutrition-logger-4a682-default-rtdb.firebaseio.com/"
 );
 
 const appData = new AppData();
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyDNfDByfFY5N4hsLUPVE-5TDKwE3CxY4Js",
-  authDomain: "nutrition-tracker-b1f22.firebaseapp.com",
-  projectId: "nutrition-tracker-b1f22",
-  storageBucket: "nutrition-tracker-b1f22.appspot.com",
-  messagingSenderId: "210142797150",
-  appId: "1:210142797150:web:5d576080586f281e3843cf",
-  measurementId: "G-87MHKHHC6R"
+  apiKey: "AIzaSyDaNdqJ6U40eJO_nosHlw7Lj0_MzbXGvAg",
+  authDomain: "nutrition-logger-4a682.firebaseapp.com",
+  projectId: "nutrition-logger-4a682",
+  storageBucket: "nutrition-logger-4a682.appspot.com",
+  messagingSenderId: "434895144907",
+  appId: "1:434895144907:web:481cff3fc742342ebb584e",
+  measurementId: "G-F2ZJESK4VN"
 
 };
 
@@ -75,7 +75,7 @@ const displayEntry = (name, carbs, protein, fat) => {
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  API.post("/", {
+  API.post("/history.json", {
     fields: {
       name: { stringValue: name.value },
       carbs: { integerValue: carbs.value },
@@ -103,8 +103,8 @@ form.addEventListener("submit", (event) => {
 });
 
 const init = () => {
-  API.get("/?pageSize=100").then((data) => {
-    data.documents?.forEach((doc) => {
+  API.get("/history.json?pageSize=100").then((data) => {
+    data?.documents?.forEach((doc) => {
       const fields = doc.fields;
 
       displayEntry(
@@ -142,13 +142,11 @@ const renderChart = () => {
     },
     options: {
       scales: {
-        yAxes: [
-          {
+        y: {
             ticks: {
               beginAtZero: true,
             },
           },
-        ],
       },
     },
   });
