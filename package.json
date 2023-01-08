@@ -6,6 +6,7 @@
   "source": "src/index.js",
   "main": "docs/main.js",
   "module": "docs/module.js",
+  "distDir": "docs/",
   "scripts": {
     "watch": "parcel watch",
     "serve": "parcel index.html",
