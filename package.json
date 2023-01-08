@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "description": "Simple nutrition logger for calculating macronutrients",
   "source": "src/index.js",
-  "main": "dist/main.js",
-  "module": "dist/module.js",
+  "main": "docs/main.js",
+  "module": "docs/module.js",
   "scripts": {
     "watch": "parcel watch",
     "serve": "parcel index.html",
