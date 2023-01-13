@@ -3,6 +3,12 @@ export default class AppData {
     this.food = [];
   }
 
+  removeFood(position) {
+    if (this.food.length > position && position >= 0) {
+      this.food.splice(position, 1);
+    }
+  }
+
   addFood(carbs, protein, fat) {
     this.food.push({
       carbs: Number.parseInt(carbs, 10),

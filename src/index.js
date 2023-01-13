@@ -40,6 +40,8 @@ const db = getFirestore(app);
 // Initialize Analytics
 const analytics = getAnalytics(app);
 
+snackbar.duration = 1500;
+snackbar.gap = 250;
 
 const list = document.querySelector("#food-list");
 const form = document.querySelector("#create-form");
@@ -48,13 +50,54 @@ const carbs = document.querySelector("#create-carbs");
 const protein = document.querySelector("#create-protein");
 const fat = document.querySelector("#create-fat");
 
-const displayEntry = (name, carbs, protein, fat) => {
+const registerCloseBtns = () => {
+  const cardClosers = document.querySelectorAll(".delete-btn");
+  cardClosers.forEach((card, index) => {
+    if (card.oldOnClick) {
+      card.removeEventListener('click', card.oldOnClick)
+    };
+
+    const newOnClick = () => {
+      handleCardClose(index, card);
+    };
+
+    card.addEventListener('click', newOnClick);
+    card.oldOnClick = newOnClick;
+  });
+};
+
+const handleCardClose = (position, card) => {
+  API.post("/history.json", {
+    position
+  }).then((data) => {
+    console.log(data)
+    if (data.error) {
+      console.error(data.error)
+        snackbar.show(
+          "Unable to remove item."
+        );
+    } else {
+      card.parentNode.parentNode.remove();
+        snackbar.show(
+          "Removed Item"
+        );
+      appData.removeFood(position);
+      render();
+    };
+  });
+};
+
+const displayEntry = (name, carbsRaw, proteinRaw, fatRaw) => {
+  const carbs = (carbsRaw != 0) ? carbsRaw : 0;
+  const protein = (proteinRaw != 0) ? proteinRaw : 0; 
+  const fat = (fatRaw != 0) ? fatRaw : 0;  
   appData.addFood(carbs, protein, fat);
   list.insertAdjacentHTML(
     "beforeend",
     `<li class="card">
         <div>
           <h3 class="name">${capitalize(name)}</h3>
+          <button type="button" class="delete-btn">Close</button>
           <div class="calories">${calculateCalories(
             carbs,
             protein,
@@ -134,7 +177,7 @@ const renderChart = () => {
             appData.getTotalFat(),
           ],
           backgroundColor: ["#25AEEE", "#FECD52", "#57D269"],
-          borderWidth: 3, // example of other customization
+          borderWidth: 3,
         },
       ],
     },
@@ -159,6 +202,7 @@ const updateTotalCalories = () => {
 const render = () => {
   renderChart();
   updateTotalCalories();
+  registerCloseBtns();
 };
 
 init();

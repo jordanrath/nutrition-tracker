@@ -361,6 +361,10 @@ select {
   color: #777;
 }
 
+.delete-btn:hover {
+  color: rgb(54, 54, 54);
+}
+
 #total-calories-container {
   border: 1px solid var(--primary-3);
 }
