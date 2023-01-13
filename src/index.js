@@ -199,6 +199,7 @@ const updateTotalCalories = () => {
   totalCalories.textContent = appData.getTotalCalories();
 };
 
+// call render
 const render = () => {
   renderChart();
   updateTotalCalories();
