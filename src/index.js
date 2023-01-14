@@ -159,8 +159,6 @@ const init = () => {
   });
 };
 
-
-//render chart
 let chartInstance = null;
 const renderChart = () => {
   chartInstance?.destroy();
