@@ -97,7 +97,7 @@ const displayEntry = (name, carbsRaw, proteinRaw, fatRaw) => {
     `<li class="card">
         <div>
           <h3 class="name">${capitalize(name)}</h3>
-          <button type="button" class="delete-btn">Close</button>
+          <button type="button" class="delete-btn">Delete</button>
           <div class="calories">${calculateCalories(
             carbs,
             protein,
